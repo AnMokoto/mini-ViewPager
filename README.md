@@ -1,6 +1,7 @@
 # mini-viewpager
 [![npm](https://img.shields.io/npm/v/mini-viewpager.svg)](https://www.npmjs.com/package/mini-viewpager)  [![Package Control](https://img.shields.io/packagecontrol/dm/mini-viewpager.svg)](https://github.com/mini-plug/mini-ViewPager.git)
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/mini-plug/mini-ViewPager/master.svg)
+[![Build Status](https://travis-ci.org/mini-plug/mini-ViewPager.svg?branch=master)](https://travis-ci.org/mini-plug/mini-ViewPager)
 
 ## 使用方法
  1.  `npm i mini-viewpager` or `yarn add mini-viewpager`
