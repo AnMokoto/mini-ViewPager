@@ -1,0 +1,38 @@
+/* components/tabIndicator/tabIndicator.wxss */
+
+.tab {
+  height: 2rem;
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: nowrap; *//* padding: 2px; */
+  overflow-x: visible;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.tab-item {
+  font-size: 0.75rem;
+  height: auto;
+  /* min-width: 1.5rem; *//* overflow-x: hidden; */
+  margin: 0 0.5rem;
+  font-style: normal;
+  /* display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-self: center;
+  align-items: center;
+  justify-content: center; */
+  white-space: nowrap;
+}
+
+.tab-item-unselect {
+  color: rgb(107, 97, 97);
+  font-weight: normal;
+  transform-origin: 50% 50% 0px;
+  transform: translate(0) scale(1.0);
+}
+
+.tab-item-select {
+  color: #000;
+  font-weight: bold;
+}

@@ -1,0 +1,9 @@
+<view style='padding-top:{{statusBarHeight}}rpx;' class='mine-navigation'>
+    <tabIndicator tab="{{tab}}" bind:onTabSelect='onTabSelect' currentIndex="{{tabCurrentIndex}}"></tabIndicator>
+</view>
+
+<viewpager currentIndex="{{currentIndex}}" count="{{tab.length}}" onPagerChange="{{onPagerChange}}">
+    <block wx:for="{{tab}}" wx:for-item="item" wx:key="{{index}}">
+        <view slot="viewpager-{{index}}">{{item.name}}</view>
+    </block>
+</viewpager>

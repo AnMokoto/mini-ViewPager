@@ -1,0 +1,17 @@
+<!--components/tabIndicator/tabIndicator.wxml-->
+<view style='display:flex;flex-direction:column'>
+  <scroll-view scroll-x scroll-with-animation="true" scroll-left="{{scrollLeft}}" id='tabIndicator'>
+    <view class='tab' style='justify-content: {{tabDirection}};'>
+      <block wx:for="{{localTab}}" wx:for-item="item" wx:key="{{index}}">
+        <view data-index="{{index}}" animation="{{ item.animation }}" class="tab-item {{index === localCurrentIndex ? 'tab-item-select':'tab-item-unselect'}}" bindtap='onTabClick' id='tab-item-{{index}}'>
+          <text>{{item.name}}</text>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+  <scroll-view scroll-x scroll-with-animation="true" scroll-left="0">
+    <view>
+      <hr />
+    </view>
+  </scroll-view>
+</view>

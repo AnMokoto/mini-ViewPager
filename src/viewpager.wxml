@@ -1,0 +1,10 @@
+<!--components/viewpager.wxml-->
+
+
+<swiper current='{{currentIndex}}' circular='false' easing-function="{{easing}}" bindchange='onViewChange' bindanimationfinish='onViewAnimationFinish' bindtransition='onViewTransition' class="viewpager">
+  <block wx:for="{{count-0}}" wx:key="{{index}}">
+    <swiper-item>
+      <slot name="viewpager-{{index}}"></slot>
+    </swiper-item>
+  </block>
+</swiper>
