@@ -1,7 +1,7 @@
 /* components/viewpager.wxss */
 .viewpager {
-  position: fixed;
-  height: 100%;
+  position: relative;
+  height: auto;
   width: 100%;
   display: flex;
   flex-direction: column;

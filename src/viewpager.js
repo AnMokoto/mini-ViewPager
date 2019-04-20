@@ -62,7 +62,8 @@ Component({
     onPagerChange: {
       type: PagerChange,
       value: undefined
-    }
+    },
+    height:'100%'
   },
 
   /**
@@ -80,6 +81,28 @@ Component({
    * tips:外部可直接修改的监听不可设置回调方法，只能直接设置本地变量的值
    */
   observers: {
+
+    height(val){
+      if(val === '100%'){
+        new Promise(((resolve, reject) => {
+          wx.createSelectorQuery().in(this).select(".viewpager").boundingClientRect(function (res) {
+            resolve(res)
+          }).exec()
+        })).then((res)=>{
+
+          let height = 0
+
+          if((typeof res === "undefined" || res === null)||(res.bottom === 0)){
+            height = wx.getSystemInfoSync().windowHeight - res.top
+          }else{
+            height = (res.bottom - res.top)
+          }
+          this.setData({
+            height:height
+          })
+        })
+      }
+    },
 
     onPagerChange(val) {
       this.setData({
