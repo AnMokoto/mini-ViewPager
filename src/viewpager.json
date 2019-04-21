@@ -1,6 +1,4 @@
 {
   "component": true,
-  "usingComponents": {},
-  "name": "viewpager",
-  "enablePullDownRefresh": true
+  "usingComponents": {}
 }

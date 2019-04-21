@@ -1,13 +1,11 @@
 /* components/viewpager.wxss */
 .viewpager {
   position: relative;
-  height: auto;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center; /*垂直居中*/
   justify-content: center; /*水平居中*/
-  background: #f0f;
 }
 
 hr {

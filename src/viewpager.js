@@ -11,9 +11,9 @@ function PagerChange(onPageSelected, onPageScrolled, onPageScrollStateChanged) {
    * @param index 当前界面显示的下标
    */
   this.onPageSelected =
-    typeof onPageSelected !== 'undefined' ? onPageSelected : function (index) {
-      console.log('current select index --->' + index)
-    }
+      typeof onPageSelected !== 'undefined' ? onPageSelected : function(index) {
+        console.log('current select index --->' + index)
+      }
 
   /**
    * 滑动进度
@@ -22,9 +22,9 @@ function PagerChange(onPageSelected, onPageScrolled, onPageScrollStateChanged) {
    * @param px 滑动的像素
    */
   this.onPageScrolled =
-    typeof onPageScrolled !== 'undefined' ? onPageScrolled : function (preIndex, ratio, px) {
-      console.log('current previous index --->' + preIndex + ' current scroll ratio ---->' + ratio + ' current scroll px ---->' + px)
-    }
+      typeof onPageScrolled !== 'undefined' ? onPageScrolled : function(preIndex, ratio, px) {
+        console.log('current previous index --->' + preIndex + ' current scroll ratio ---->' + ratio + ' current scroll px ---->' + px)
+      }
 
 
   /**
@@ -32,9 +32,9 @@ function PagerChange(onPageSelected, onPageScrolled, onPageScrollStateChanged) {
    * @param state [PageStat]
    */
   this.onPageScrollStateChanged =
-    typeof onPageScrollStateChanged !== 'undefined' ? onPageScrollStateChanged : function (state) {
-      console.log('scroll state --->' + state)
-    }
+      typeof onPageScrollStateChanged !== 'undefined' ? onPageScrollStateChanged : function(state) {
+        console.log('scroll state --->' + state)
+      }
 }
 /**
  * @param  bind:onPagerChange             PagerChange
@@ -62,8 +62,7 @@ Component({
     onPagerChange: {
       type: PagerChange,
       value: undefined
-    },
-    height:'100%'
+    }
   },
 
   /**
@@ -74,6 +73,7 @@ Component({
     scrollRatio: 0,
     scrollPx: 0,
     pageState: PageState.IDEL,
+    height: '100%'
   },
 
   /**
@@ -82,27 +82,27 @@ Component({
    */
   observers: {
 
-    height(val){
-      if(val === '100%'){
-        new Promise(((resolve, reject) => {
-          wx.createSelectorQuery().in(this).select(".viewpager").boundingClientRect(function (res) {
-            resolve(res)
-          }).exec()
-        })).then((res)=>{
+    // height(val) {
+    //   if (val === '100%') {
+    //     new Promise(((resolve, reject) => {
+    //       wx.createSelectorQuery().in(this).select(".viewpager").boundingClientRect(function(res) {
+    //         resolve(res)
+    //       }).exec()
+    //     })).then((res) => {
 
-          let height = 0
+    //       let height = 0
 
-          if((typeof res === "undefined" || res === null)||(res.bottom === 0)){
-            height = wx.getSystemInfoSync().windowHeight - res.top
-          }else{
-            height = (res.bottom - res.top)
-          }
-          this.setData({
-            height:height
-          })
-        })
-      }
-    },
+    //       if ((typeof res === "undefined" || res === null) || (res.bottom === 0)) {
+    //         height = wx.getSystemInfoSync().windowHeight - res.top
+    //       } else {
+    //         height = (res.bottom - res.top)
+    //       }
+    //       this.setData({
+    //         height: height
+    //       })
+    //     })
+    //   }
+    // },
 
     onPagerChange(val) {
       this.setData({
@@ -123,7 +123,7 @@ Component({
       }
     },
 
-    'scrollRatio,scrollPx': function (ratio, px) {
+    'scrollRatio,scrollPx': function(ratio, px) {
       wx.nextTick(() => {
         this.data.pageChange.onPageScrolled(this.data.currentIndex, this.data.scrollRatio, this.data.scrollPx)
       })
@@ -179,7 +179,23 @@ Component({
   },
 
   ready() {
+    var glob = this
+    this.createIntersectionObserver({
+          observeAll: false
+        })
+        .relativeToViewport({
+          bottom: 0
+        }).observe('#viewpager', function(res) {
+      if (res) {
+        var rect = res.relativeRect
+        var height = Math.min(rect.bottom, wx.getSystemInfoSync().windowHeight)
+        height -= rect.top
 
+        glob.setData({
+          height: height
+        })
+      }
+    })
   },
 
   detached() {
